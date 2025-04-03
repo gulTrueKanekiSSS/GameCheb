@@ -9,3 +9,4 @@ bot = subprocess.Popen(["python", "bot/bot.py"])
 # Ждём завершения
 django.wait()
 bot.wait()
+
