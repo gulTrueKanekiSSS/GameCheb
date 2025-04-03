@@ -1,1 +1,1 @@
-web: gunicorn CameCheb.wsgi
+web: gunicorn GameCheb.wsgi
