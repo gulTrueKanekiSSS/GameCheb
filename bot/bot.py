@@ -2,13 +2,9 @@ import os
 import django
 import sys
 
-# Добавляем корень проекта в PYTHONPATH
-sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '../../')))
-
-# Подключаем Django
+sys.path.append(os.path.join(os.path.dirname(__file__), '..', 'GameCheb'))
 os.environ.setdefault("DJANGO_SETTINGS_MODULE", "quest_bot.settings")
 django.setup()
-
 
 import logging
 from aiogram import Bot, Dispatcher, types
