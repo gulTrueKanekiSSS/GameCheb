@@ -2,8 +2,11 @@ import os
 import django
 import sys
 
+# Добавляем корень проекта в PYTHONPATH
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '../../')))
-os.environ.setdefault("DJANGO_SETTINGS_MODULE", "quest_bot.settings")
+
+# Подключаем Django
+os.environ.setdefault("DJANGO_SETTINGS_MODULE", "GameCheb.quest_bot.settings")
 django.setup()
 
 import logging
