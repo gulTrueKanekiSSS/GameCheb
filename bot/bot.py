@@ -5,10 +5,11 @@ from aiogram.filters.command import Command
 from aiogram.types import ReplyKeyboardMarkup, KeyboardButton
 from aiogram.client.default import DefaultBotProperties
 from django.conf import settings
-from core.models import User, Quest, UserQuestProgress
+
 from dotenv import load_dotenv
 from asgiref.sync import sync_to_async
 
+from core.models import User, Quest, UserQuestProgress
 # Импортируем административные команды
 from . import admin_commands
 
