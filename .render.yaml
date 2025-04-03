@@ -1,45 +1,46 @@
 databases:
-  - name: questbot-db              # определяем базу данных PostgreSQL
+  - name: gamecheb-db
     plan: free
-    databaseName: questbot         # имя базы
-    user: questbot
+    databaseName: gamecheb
+    user: gamecheb
+
 services:
-  - type: web                      # веб-сервис для Django
-    name: questbot-web
+  - type: web
+    name: gamecheb-web
     runtime: python
     plan: free
-    envVars:
-      - key: DJANGO_SETTINGS_MODULE
-        value: GameCheb.quest_bot.settings
-      - key: SECRET_KEY
-        generateValue: true        # сгенерировать SECRET_KEY автоматически
-      - key: ALLOWED_HOSTS
-        value: "questbot.onrender.com"   # ваш домен на Render
-      - key: DATABASE_URL
-        fromDatabase:
-          name: questbot-db
-          property: connectionString
-      - key: PYTHONPATH
-        value: /opt/render/project/src/GameCheb
     buildCommand: pip install -r requirements.txt
     startCommand: gunicorn quest_bot.wsgi:application --bind 0.0.0.0:$PORT
-
-  - type: worker                   # фоновый процесс для Telegram-бота
-    name: questbot-bot
-    runtime: python
-    plan: free
     envVars:
       - key: DJANGO_SETTINGS_MODULE
         value: quest_bot.settings
-      - key: BOT_TOKEN
-        value: "<YOUR_BOT_TOKEN>"  # задайте токен вашего бота
       - key: SECRET_KEY
-        sync: true                 # взять то же значение, что и у web (можно через группу envVars)
+        generateValue: true
       - key: DATABASE_URL
         fromDatabase:
-          name: questbot-db
-          property: connectionString
+            name: gamecheb-db
+            property: connectionString
+      - key: ALLOWED_HOSTS
+        value: "*"
       - key: PYTHONPATH
         value: /opt/render/project/src/GameCheb
+
+  - type: worker
+    name: gamecheb-bot
+    runtime: python
+    plan: free
     buildCommand: pip install -r requirements.txt
     startCommand: python bot/bot.py
+    envVars:
+      - key: DJANGO_SETTINGS_MODULE
+        value: quest_bot.settings
+      - key: SECRET_KEY
+        sync: true
+      - key: DATABASE_URL
+        fromDatabase:
+            name: gamecheb-db
+            property: connectionString
+      - key: TELEGRAM_BOT_TOKEN
+        value: <вставь_токен_бота>
+      - key: PYTHONPATH
+        value: /opt/render/project/src/GameCheb
