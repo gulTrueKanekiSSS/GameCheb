@@ -23,8 +23,7 @@ from asgiref.sync import sync_to_async
 
 from core.models import User, Quest, UserQuestProgress
 # Импортируем административные команды
-from . import admin_commands
-
+import admin_commands
 # Явно загружаем переменные окружения
 load_dotenv(override=True)
 
