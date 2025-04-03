@@ -1,5 +1,12 @@
-import logging
 import os
+import django
+import sys
+
+sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
+os.environ.setdefault("DJANGO_SETTINGS_MODULE", "GameCheb.settings")
+django.setup()
+
+import logging
 from aiogram import Bot, Dispatcher, types
 from aiogram.filters.command import Command
 from aiogram.types import ReplyKeyboardMarkup, KeyboardButton
