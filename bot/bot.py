@@ -9,7 +9,8 @@ if BASE_DIR not in sys.path:
 # Теперь можно импортировать настройки Django-проекта
 os.environ.setdefault("DJANGO_SETTINGS_MODULE", "quest_bot.settings")
 
-
+import django
+django.setup()
 
 import logging
 from aiogram import Bot, Dispatcher, types
