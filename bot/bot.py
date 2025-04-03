@@ -1,10 +1,14 @@
 import os
-import django
 import sys
+import django
 
-sys.path.append(os.path.join(os.path.dirname(__file__), '..', 'GameCheb'))
+# Добавляем /src/GameCheb в PYTHONPATH
+BASE_DIR = os.path.abspath(os.path.join(os.path.dirname(__file__), '../GameCheb'))
+sys.path.insert(0, BASE_DIR)
+
 os.environ.setdefault("DJANGO_SETTINGS_MODULE", "quest_bot.settings")
 django.setup()
+
 
 import logging
 from aiogram import Bot, Dispatcher, types
