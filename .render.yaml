@@ -10,7 +10,7 @@ services:
     plan: free
     envVars:
       - key: DJANGO_SETTINGS_MODULE
-        value: quest_bot.settings
+        value: GameCheb.quest_bot.settings
       - key: SECRET_KEY
         generateValue: true        # сгенерировать SECRET_KEY автоматически
       - key: ALLOWED_HOSTS
