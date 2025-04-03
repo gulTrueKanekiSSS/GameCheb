@@ -1,12 +1,19 @@
 import subprocess
 import os
+import sys
 
-os.environ.setdefault("DJANGO_SETTINGS_MODULE", "GameCheb.quest_bot.settings")
-# Запускаем Django
-django = subprocess.Popen(["gunicorn", "GameCheb.quest_bot.wsgi"])
+# Добавляем папку GameCheb в PYTHONPATH
+sys.path.append(os.path.join(os.path.dirname(__file__), 'GameCheb'))
 
-# Запускаем бота
-bot = subprocess.Popen(["python", "bot/bot.py"])  # путь до твоего bot.py
+# Указываем правильный путь к settings
+os.environ.setdefault("DJANGO_SETTINGS_MODULE", "quest_bot.settings")
 
+# Запускаем Django через gunicorn
+django = subprocess.Popen(["gunicorn", "quest_bot.wsgi"])
+
+# Запускаем aiogram-бота
+bot = subprocess.Popen(["python", "GameCheb/api/bot/bot.py"])
+
+# Ожидаем завершения обоих
 django.wait()
 bot.wait()

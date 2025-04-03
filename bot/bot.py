@@ -6,7 +6,7 @@ import sys
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '../../')))
 
 # Подключаем Django
-os.environ.setdefault("DJANGO_SETTINGS_MODULE", "GameCheb.quest_bot.settings")
+os.environ.setdefault("DJANGO_SETTINGS_MODULE", "quest_bot.settings")
 django.setup()
 
 import logging
