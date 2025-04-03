@@ -1,13 +1,14 @@
 import os
-import sys
-import django
+import os, sys
 
-# Добавляем /src/GameCheb в PYTHONPATH
-BASE_DIR = os.path.abspath(os.path.join(os.path.dirname(__file__), '../GameCheb'))
-sys.path.insert(0, BASE_DIR)
+# Определяем путь к директории GameCheb (родительской для quest_bot)
+BASE_DIR = os.path.abspath(os.path.join(os.path.dirname(__file__), "..", "GameCheb"))
+if BASE_DIR not in sys.path:
+    sys.path.insert(0, BASE_DIR)
 
+# Теперь можно импортировать настройки Django-проекта
 os.environ.setdefault("DJANGO_SETTINGS_MODULE", "quest_bot.settings")
-django.setup()
+
 
 
 import logging
