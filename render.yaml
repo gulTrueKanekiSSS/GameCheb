@@ -41,6 +41,6 @@ services:
             name: gamecheb-db
             property: connectionString
       - key: TELEGRAM_BOT_TOKEN
-        value: <вставь_токен_бота>
+        value: 7214942810:AAErzQ5KjgzjA2qnSaX7s6_FFMGcrDgmZXc
       - key: PYTHONPATH
         value: /opt/render/project/src/GameCheb
