@@ -1,1 +1,1 @@
-web: gunicorn GameCheb.wsgi
+web: gunicorn quest_bot.wsgi

@@ -1,12 +1,11 @@
 import subprocess
+import os
 
-# Запускаем Django через gunicorn
-django = subprocess.Popen(["gunicorn", "GameCheb.wsgi"])
+# Запускаем Django
+django = subprocess.Popen(["gunicorn", "quest_bot.wsgi"])
 
-# Запускаем aiogram-бота
-bot = subprocess.Popen(["python", "bot/bot.py"])
+# Запускаем бота
+bot = subprocess.Popen(["python", "api/bot/bot.py"])  # путь до твоего bot.py
 
-# Ждём завершения
 django.wait()
 bot.wait()
-
