@@ -3,11 +3,11 @@ import sys
 import django
 
 # Путь до GameCheb — чтобы Django и приложения были видны
-BASE_DIR = os.path.abspath(os.path.join(os.path.dirname(__file__), "..", "GameCheb"))
+BASE_DIR = os.path.abspath(os.path.join(os.path.dirname(__file__), ".."))
 sys.path.insert(0, BASE_DIR)
 
 # Указываем Django settings с полным путём
-os.environ.setdefault("DJANGO_SETTINGS_MODULE", "GameCheb.quest_bot.settings")
+os.environ.setdefault("DJANGO_SETTINGS_MODULE", "quest_bot.settings")
 
 django.setup()
 
