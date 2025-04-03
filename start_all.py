@@ -12,7 +12,7 @@ os.environ.setdefault("DJANGO_SETTINGS_MODULE", "quest_bot.settings")
 django = subprocess.Popen(["gunicorn", "quest_bot.wsgi"])
 
 # Запускаем aiogram-бота
-bot = subprocess.Popen(["python", "GameCheb/bot/bot.py"])
+bot = subprocess.Popen(["python3", "GameCheb/bot/bot.py"])
 
 # Ожидаем завершения обоих
 django.wait()
