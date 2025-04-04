@@ -221,4 +221,8 @@ async def start_bot():
         await dp.start_polling(bot, skip_updates=True)
     except Exception as e:
         logger.error(f"Ошибка при запуске бота: {e}")
-        raise 
+        raise
+
+if __name__ == "__main__":
+    import asyncio
+    asyncio.run(start_bot())
