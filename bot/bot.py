@@ -6,7 +6,7 @@ from aiogram.client.default import DefaultBotProperties
 from django.conf import settings
 from asgiref.sync import sync_to_async
 
-from bot.handlers_core import cmd_start, handle_contact, get_quest, my_promocodes, handle_photo
+from .handlers_core import cmd_start, handle_contact, get_quest, my_promocodes, handle_photo
 from core.models import User, Quest, UserQuestProgress
 import admin_commands
 
