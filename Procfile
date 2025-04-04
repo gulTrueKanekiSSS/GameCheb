@@ -1,1 +1,1 @@
-web: gunicorn quest_bot.wsgi
+worker: python bot/bot.py
