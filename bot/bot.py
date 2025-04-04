@@ -1,6 +1,8 @@
 import os
 import sys
 import django
+from dotenv import load_dotenv
+load_dotenv(override=True)
 
 # Путь до GameCheb — чтобы Django и приложения были видны
 BASE_DIR = os.path.abspath(os.path.join(os.path.dirname(__file__), ".."))
@@ -18,14 +20,13 @@ from aiogram.types import ReplyKeyboardMarkup, KeyboardButton
 from aiogram.client.default import DefaultBotProperties
 from django.conf import settings
 
-from dotenv import load_dotenv
 from asgiref.sync import sync_to_async
 
 from core.models import User, Quest, UserQuestProgress
 # Импортируем административные команды
 import admin_commands
 # Явно загружаем переменные окружения
-load_dotenv(override=True)
+
 
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
