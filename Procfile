@@ -1,1 +1,1 @@
-web: python bot/bot.py && sleep infinity
+web: python bot/bot.py

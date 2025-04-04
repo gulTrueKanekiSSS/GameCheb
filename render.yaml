@@ -1,7 +1,6 @@
-
 services:
   - type: web
-    name: gamecheb-web
+    name: gamecheb-api
     runtime: python
     plan: free
     buildCommand: pip install -r requirements.txt
@@ -12,28 +11,8 @@ services:
       - key: SECRET_KEY
         generateValue: true
       - key: DATABASE_URL
-        fromDatabase:
-            name: postgres
-            property: connectionString
+        value: postgresql://postgres_8nu3_user:XCKx6lfQLSYW9ohMVwo0GSEg22pls1Hb@dpg-cvc0v7dsvqrc73aj7ag0-a/postgres_8nu3
       - key: ALLOWED_HOSTS
         value: "*"
-      - key: PYTHONPATH
-        value: /opt/render/project/src/GameCheb
-
-  - type: worker
-    name: gamecheb-bot
-    runtime: python
-    plan: free
-    buildCommand: pip install -r requirements.txt
-    startCommand: python bot/bot.py
-    envVars:
-      - key: DJANGO_SETTINGS_MODULE
-        value: quest_bot.settings
-      - key: DATABASE_URL
-        fromDatabase:
-            name: postgres
-            property: connectionString
-      - key: TELEGRAM_BOT_TOKEN
-        value: 7214942810:AAErzQ5KjgzjA2qnSaX7s6_FFMGcrDgmZXc
       - key: PYTHONPATH
         value: /opt/render/project/src/GameCheb
