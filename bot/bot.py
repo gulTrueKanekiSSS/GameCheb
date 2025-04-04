@@ -225,5 +225,26 @@ async def start_bot():
         raise
 
 if __name__ == "__main__":
+    import threading
+    from http.server import BaseHTTPRequestHandler, HTTPServer
+
+
+    # Фейковый HTTP-сервер для Railway
+    class PingHandler(BaseHTTPRequestHandler):
+        def do_GET(self):
+            self.send_response(200)
+            self.end_headers()
+            self.wfile.write(b"Pong!")
+
+
+    def run_fake_server():
+        port = int(os.environ.get("PORT", 8080))
+        httpd = HTTPServer(("0.0.0.0", port), PingHandler)
+        httpd.serve_forever()
+
+
+    threading.Thread(target=run_fake_server, daemon=True).start()
+
     import asyncio
+
     asyncio.run(start_bot())
