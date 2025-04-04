@@ -1,46 +1,37 @@
-import os
-import sys
-import django
-from dotenv import load_dotenv
-
-# Загружаем .env
-load_dotenv(override=True)
-
-# Путь до проекта
-BASE_DIR = os.path.abspath(os.path.join(os.path.dirname(__file__), ".."))
-sys.path.insert(0, BASE_DIR)
-
-# Настройка Django
-os.environ.setdefault("DJANGO_SETTINGS_MODULE", "quest_bot.settings")
-django.setup()
-
-# Логирование и Aiogram
 import logging
-from aiogram import Bot, Dispatcher
+from aiogram import Bot, Dispatcher, types
+from aiogram.filters.command import Command
+from aiogram.types import ReplyKeyboardMarkup, KeyboardButton
 from aiogram.client.default import DefaultBotProperties
 from django.conf import settings
+from asgiref.sync import sync_to_async
+
+from bot.handlers_core import cmd_start, handle_contact, get_quest, my_promocodes, handle_photo
+from core.models import User, Quest, UserQuestProgress
+import admin_commands
 
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
 
-# Инициализация бота
-bot = Bot(
-    token=os.getenv('TELEGRAM_BOT_TOKEN'),
-    default=DefaultBotProperties(parse_mode="HTML")
-)
+# Получаем токен из settings
+token = settings.TELEGRAM_BOT_TOKEN
+bot = Bot(token=token, default=DefaultBotProperties(parse_mode="HTML"))
 dp = Dispatcher()
 
-# Регистрируем хендлеры
-from bot.handlers import register_handlers
+# Регистрируем административные команды
+dp.message.register(admin_commands.handle_approve, Command("approve"))
+dp.message.register(admin_commands.handle_reject, Command("reject"))
+
+# ... все хендлеры как есть ...
 
 async def start_bot():
-    register_handlers(dp, bot)
+    dp.message.register(cmd_start, Command("start"))
+    dp.message.register(handle_contact, lambda msg: msg.contact is not None)
+    dp.message.register(get_quest, lambda msg: msg.text == "🎯 Получить квест")
+    dp.message.register(my_promocodes, lambda msg: msg.text == "🎁 Мои промокоды")
+    dp.message.register(handle_photo, lambda msg: msg.photo is not None)
+
     try:
         await dp.start_polling(bot, skip_updates=True)
     except Exception as e:
         logger.error(f"Ошибка при запуске бота: {e}")
-        raise
-
-if __name__ == "__main__":
-    import asyncio
-    asyncio.run(start_bot())
