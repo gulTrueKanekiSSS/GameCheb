@@ -1,6 +1,5 @@
 import os
 import sys
-import django
 from dotenv import load_dotenv
 load_dotenv(override=True)
 
@@ -11,6 +10,7 @@ sys.path.insert(0, BASE_DIR)
 # Указываем Django settings с полным путём
 os.environ.setdefault("DJANGO_SETTINGS_MODULE", "quest_bot.settings")
 
+import django
 django.setup()
 
 import logging
