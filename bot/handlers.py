@@ -1,7 +1,7 @@
 from aiogram import types, Bot, Dispatcher
 from aiogram.filters import Command
 
-from bot.handlers_core import (
+from .handlers_core import (
     cmd_start, handle_contact,
     get_quest, my_promocodes,
     handle_photo
